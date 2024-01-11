@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from "./components/pages/Home";
-import Booking from "./components/pages/Booking";
-import Print from "./components/pages/Print";
+import HomePage from "./pages/HomePage";
+import BookPage from "./pages/BookPage";
+import ConfirmPage from "./pages/ConfirmPage";
+import Header from "./components/Header/Header";
 
 function App() {
 
@@ -9,15 +10,18 @@ function App() {
     {
       path: '/',
       children: [
-        { path: '/', element: <Home /> },
-        { path: '/booking', element: <Booking /> },
-        { path: '/print', element: <Print /> },
+        { path: '/', element: <HomePage /> },
+        { path: '/booking', element: <BookPage /> },
+        { path: '/confirm', element: <ConfirmPage /> },
       ],
     },
   ]);
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <Header />
+      <RouterProvider router={router} />
+    </>
   )
 }
 
