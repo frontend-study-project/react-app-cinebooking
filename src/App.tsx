@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from "./components/pages/Home";
 import Booking from "./components/pages/Booking";
 import Print from "./components/pages/Print";
-import './App.css'
 
 function App() {
 

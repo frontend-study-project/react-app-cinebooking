@@ -1,9 +1,7 @@
 const Home = () => {
 
   return (
-    <>
-      메인입니다
-    </>
+    <div className="text-3xl font-bold underline">홈입니다</div>
   )
 }
 export default Home;
