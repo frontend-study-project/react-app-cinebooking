@@ -1,6 +1,7 @@
 export const movieFetcher = async () => {
   const apiUrl = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
   const apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNjdhZmMwMzY4ZWE5ZmQ2MmY2NmJjM2Y2Yjc2YTNjYSIsInN1YiI6IjY1YTBiODE2MmNlZmMyMDEyNTM3NTM1NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tmguS-_f-tuirKlSzIh8zaQFtbBbzYcBf3RZUZObO8k';
+  // 예은
 
   try {
     const response = await fetch(apiUrl, {
