@@ -1,0 +1,11 @@
+type Props = {
+  children: React.ReactNode;
+}
+const Box = (props: Props) => {
+  return (
+    <div className="mx-auto max-w-screen-lg p-6 border border-gray-300 rounded-lg">
+      {props.children}
+    </div>
+  )
+}
+export default Box;
