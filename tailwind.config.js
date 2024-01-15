@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-		"./src/**/*.{js,ts,jsx,tsx}",
-	],
+    "./src/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     extend: {
       colors: {
+        mainColor: "#ec4899",
         "black-1": "#1b1b1b",
         "black-a": "#aaaaaa",
         "age-all": "#239c57",
@@ -19,6 +20,6 @@ export default {
     },
   },
   plugins: [
-		require("tailwind-scrollbar")
-	],
+    require("tailwind-scrollbar")
+  ],
 };
