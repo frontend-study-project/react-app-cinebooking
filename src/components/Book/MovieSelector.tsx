@@ -29,7 +29,7 @@ const MovieSelector = () => {
 
   return (
     <Box>
-      <div className='grid grid-cols-[3fr_3fr_1fr_3fr] grid-rows-[40px_1fr] gap-1 w-full h-[500px] text-black-1'>
+      <div className='grid grid-cols-[3fr_3fr_1fr_3fr] grid-rows-[40px_1fr] gap-1 w-full h-[500px] text-black-1 text-sm'>
         <div className='bg-gray-200 text-center font-bold leading-[40px]'>영화</div>
         <div className='bg-gray-200 text-center font-bold leading-[40px]'>극장</div>
         <div className='bg-gray-200 text-center font-bold leading-[40px]'>날짜</div>
@@ -131,7 +131,7 @@ const MovieSelector = () => {
         </div>
       </div >
       <div className='flex justify-between items-center w-full h-[100px] mt-2 bg-gray-200 text-black-1'>
-        <div className='flex flex-row items-center gap-5 ml-5 text-xl'>
+        <div className='flex flex-row items-center gap-5 ml-5'>
           <span>영화선택</span>
           <FaAngleRight className='' />
           <span>극장선택</span>
