@@ -142,7 +142,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1217',
-        name: '광명역',
+        name: '광명역점',
       },
       {
         id: 'T0383',
@@ -158,7 +158,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T0636',
-        name: '김포웰라움',
+        name: '김포웰라움점',
       },
       {
         id: 'T0168',
@@ -170,7 +170,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1220',
-        name: '다산현대캠퍼스몰',
+        name: '다산현대캠퍼스몰점',
       },
       {
         id: 'T0721',
@@ -202,7 +202,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1145',
-        name: '드라이브인곤지암',
+        name: '드라이브인곤지암점',
       },
       {
         id: 'T0440',
@@ -238,7 +238,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1071',
-        name: '성남모란',
+        name: '성남모란점',
       },
       {
         id: 'T1307',
@@ -391,7 +391,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1073',
-        name: '연수역',
+        name: '연수역점',
       },
       {
         id: 'T0171',
@@ -403,11 +403,11 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1098',
-        name: '인천도화',
+        name: '인천도화점',
       },
       {
         id: 'T0610',
-        name: '인천시민공원',
+        name: '인천시민공원점',
       },
       {
         id: 'T0176',
@@ -509,11 +509,11 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1111',
-        name: '천안시청',
+        name: '천안시청점',
       },
       {
         id: 'T0706',
-        name: '천안업성',
+        name: '천안업성점',
       },
       {
         id: 'T1237',
@@ -570,7 +570,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1072',
-        name: '대구아카데미',
+        name: '대구아카데미점',
       },
       {
         id: 'T1154',
@@ -765,7 +765,7 @@ export const groupedTheater: GroupedTheater[] = [
       },
       {
         id: 'T1074',
-        name: '광주금남로',
+        name: '광주금남로점',
       },
       {
         id: 'T0226',

@@ -646,7 +646,7 @@ export const theater: Theater[] = [
   },
   {
     id: 'T0610',
-    name: '인천시민공원',
+    name: '인천시민공원점',
     address_SiDo: '인천광역시',
     location_LO: 126.6811472,
     location_LA: 37.45777158,
@@ -674,7 +674,7 @@ export const theater: Theater[] = [
   },
   {
     id: 'T0636',
-    name: '김포웰라움',
+    name: '김포웰라움점',
     address_SiDo: '경기도',
     location_LO: 126.7235187,
     location_LA: 37.60699954,
@@ -723,7 +723,7 @@ export const theater: Theater[] = [
   },
   {
     id: 'T0706',
-    name: '천안업성',
+    name: '천안업성점',
     address_SiDo: '충청남도',
     location_LO: 127.1351597,
     location_LA: 36.84422849,
@@ -895,28 +895,28 @@ export const theater: Theater[] = [
 
   {
     id: 'T1071',
-    name: '성남모란',
+    name: '성남모란점',
     address_SiDo: '경기도',
     location_LO: 127.1297621,
     location_LA: 37.43139093,
   },
   {
     id: 'T1072',
-    name: '대구아카데미',
+    name: '대구아카데미점',
     address_SiDo: '대구광역시',
     location_LO: 128.5943232,
     location_LA: 35.86998532,
   },
   {
     id: 'T1073',
-    name: '연수역',
+    name: '연수역점',
     address_SiDo: '인천광역시',
     location_LO: 126.6772501,
     location_LA: 37.41765563,
   },
   {
     id: 'T1074',
-    name: '광주금남로',
+    name: '광주금남로점',
     address_SiDo: '광주광역시',
     location_LO: 126.9146617,
     location_LA: 35.14683497,
@@ -924,7 +924,7 @@ export const theater: Theater[] = [
 
   {
     id: 'T1098',
-    name: '인천도화',
+    name: '인천도화점',
     address_SiDo: '인천광역시',
     location_LO: 126.6645292,
     location_LA: 37.46954267,
@@ -952,7 +952,7 @@ export const theater: Theater[] = [
   },
   {
     id: 'T1111',
-    name: '천안시청',
+    name: '천안시청점',
     address_SiDo: '충청남도',
     location_LO: 127.1100122,
     location_LA: 36.81896008,
@@ -980,7 +980,7 @@ export const theater: Theater[] = [
   },
   {
     id: 'T1145',
-    name: '드라이브인곤지암',
+    name: '드라이브인곤지암점',
     address_SiDo: '경기도',
     location_LO: 127.2981491,
     location_LA: 37.33630644,
@@ -1036,14 +1036,14 @@ export const theater: Theater[] = [
   },
   {
     id: 'T1217',
-    name: '광명역',
+    name: '광명역점',
     address_SiDo: '경기도',
     location_LO: 126.8869213,
     location_LA: 37.4227209,
   },
   {
     id: 'T1220',
-    name: '다산현대캠퍼스몰',
+    name: '다산현대캠퍼스몰점',
     address_SiDo: '경기도',
     location_LO: 127.1522826,
     location_LA: 37.61198288,
