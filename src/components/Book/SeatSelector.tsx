@@ -1,5 +1,6 @@
 import Box from "../UI/Box";
 import '../../style/SeatSelector.css'
+import SelectArea from "./SelectArea";
 
 const SeatSelector = () => {
   return (
@@ -88,7 +89,8 @@ const SeatSelector = () => {
             </div>
           </div>
         </div>
-      </Box>가
+        <SelectArea />
+      </Box>
     </>
   )
 }
