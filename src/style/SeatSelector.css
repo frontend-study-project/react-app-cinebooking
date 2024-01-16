@@ -1,0 +1,24 @@
+.container {
+    perspective: 1000px;
+}
+.screen {
+    background: #ccc;
+    width: 70%;
+    height: 150px;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+.row {
+    display: flex;
+}
+
+.seat {
+    background: #444451;
+    height: 20px;
+    width: 30px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
