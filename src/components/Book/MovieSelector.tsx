@@ -1,11 +1,17 @@
 import { useState } from 'react';
+import { useSelector } from "react-redux";
 import Box from "../UI/Box";
 import AgeChip from '../Common/AgeChip';
+import SelectArea from './SelectArea'
+import { RootState } from "../../store";
 import { groupedTheater } from '../../data/groupedTheater';
 import { getDates } from '../../utils/getDates';
-import SelectArea from './SelectArea'
 
 const MovieSelector = () => {
+  const nowPlayingMovies = useSelector((state: RootState) => state.movies.nowPlaying);
+  const popularMovies = useSelector((state: RootState) => state.movies.popular);
+  const upcomingMovies = useSelector((state: RootState) => state.movies.upcoming);
+
   const dates = getDates();
 
   const [selectMovie, setSelectMovie] = useState('');

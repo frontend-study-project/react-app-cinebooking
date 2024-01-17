@@ -1,4 +1,4 @@
-interface Movies {
+export interface Movies {
   id: number;
   title: string;
   release_date: string;
@@ -15,7 +15,7 @@ interface Movies {
   vote_count: number;
 }
 
-interface Theater {
+export interface Theater {
   id: string;
   name: string;
   address_SiDo: string;
@@ -23,14 +23,14 @@ interface Theater {
   location_LA: number;
 }
 
-interface Auditorium {
+export interface Auditorium {
   id: string;
   name: string;
   capacity: number;
   theater_id: string;
 }
 
-interface Seat {
+export interface Seat {
   id: string;
   name: string;
   seat_row: string;
@@ -38,7 +38,7 @@ interface Seat {
   auditorium_id: string;
 }
 
-interface Screen {
+export interface Screen {
   movie_id: number;
   theater_id: string;
   auditorium_id: string;
@@ -47,7 +47,7 @@ interface Screen {
   endTime: string;
 }
 
-interface Reservation {
+export interface Reservation {
   id: string;
   user_id: string;
   screen_id: string;
@@ -55,19 +55,19 @@ interface Reservation {
   isActived: boolean;
 }
 
-interface ReservedSeat {
+export interface ReservedSeat {
   id: string;
   seat_id: string;
   screen_id: string;
   reservation_id: string;
 }
 
-interface GroupedTheater {
+export interface GroupedTheater {
   address: string;
   theater: { id: string; name: string }[];
 }
 
-interface FormattedDate {
+export interface FormattedDate {
   year: number;
   month: number;
   day: number;
