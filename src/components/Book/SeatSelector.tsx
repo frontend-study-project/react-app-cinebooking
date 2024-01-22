@@ -3,6 +3,12 @@ import '../../style/SeatSelector.css'
 import SelectArea from "./SelectArea";
 
 const SeatSelector = () => {
+
+  const seats=[];
+  for(let i=1; i<=48; i++){
+    seats.push(<div key={i} className="seat"></div>)
+  }
+
   return (
     <>
       <Box>
@@ -11,7 +17,7 @@ const SeatSelector = () => {
             <div className="moviePic">사진영역</div>
           </div>
 
-          <div className="flex-1">
+          <div className="flex-1 flex flex-column align-center">
             <div className="w-64">
               <label htmlFor="select-movie" className="block text-sm font-medium text-gray-700">영화선택</label>
               <select id="select-movie" name="영화"
@@ -26,65 +32,8 @@ const SeatSelector = () => {
               <div className="container">
                 <div className="screen">screen</div>
               </div>
-              <div className="row">
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-              </div>
-              <div className="row">
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat occupied"></div>
-                <div className="seat occupied"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-              </div>
-              <div className="row">
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat occupied"></div>
-                <div className="seat occupied"></div>
-              </div>
-              <div className="row">
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-              </div>
-              <div className="row">
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat occupied"></div>
-                <div className="seat"></div>
-                <div className="seat occupied"></div>
-                <div className="seat"></div>
-              </div>
-              <div className="row">
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat"></div>
-                <div className="seat occupied"></div>
-                <div className="seat occupied"></div>
+              <div className="seat_container">
+                {seats}
               </div>
             </div>
           </div>

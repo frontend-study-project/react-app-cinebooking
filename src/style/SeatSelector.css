@@ -1,9 +1,9 @@
 .container {
     perspective: 1000px;
+    width: 70%;
 }
 .screen {
     background: #ccc;
-    width: 70%;
     height: 150px;
     margin: 15px 0;
     transform: rotateX(-45deg);
@@ -14,11 +14,17 @@
     display: flex;
 }
 
+.seat_container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 5px;
+    width: 70%;
+}
+
 .seat {
     background: #444451;
     height: 20px;
     width: 30px;
-    margin: 3px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
