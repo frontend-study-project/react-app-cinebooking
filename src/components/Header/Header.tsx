@@ -2,7 +2,7 @@ import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: '바로예약', href: '#', current: true },
+  { name: '바로예약', href: '#', current: false },
   { name: '회원가입', href: '#', current: false },
   { name: '로그인', href: '#', current: false },
 ]
@@ -31,6 +31,7 @@ export default function Example() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                <h1 className='logo'>
                 <a href='/' className="flex flex-shrink-0 items-center">
                   <img
                     className="h-10 w-auto"
@@ -38,6 +39,7 @@ export default function Example() {
                     alt="Your Company"
                   />
                 </a>
+                </h1>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
