@@ -1,29 +1,16 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { useQuery } from "@tanstack/react-query";
-import { movieFetcher } from "../../utils/http";
-
-const api_key = import.meta.env.VITE_API_KEY;
-
-// 아~~ 그렇긴 할 거 같아 ㅠ 지금 진도랑 프로젝트랑 안 맞아서
-// 앗 ㅋㅋ 알아두면 좋긴한데 사실 지금 당장은 몰라도 될거 같아 나도 잘 안쓰기도 하고
-// 어던 사람은 차라리 useMemo 안쓰는게 더 좋다고도 하구 강의라서 일단은 다 알려주나보다
-// 아진짜?ㅋㅋㅋㅋㅋ 그런가바 ㅜㅜ  그래서일단은듣는중 암튼. 이제 api호출하기 해볼게욤 근데 진짜 다써놓으셨다 ㅋㅋㅋㅋㅋ웅 할라고보니까 다해놓으셨네
-// 응응!! 정인씨?? 경쟁심 생기네 나도
+import { useNowPlayingMoviesQuery } from "../../hooks/useMovie";
+import { Movies } from "../../types";
 
 const Home = () => {
-  const { data } = useQuery({
-    queryKey: ["movie"],
-    queryFn: movieFetcher,
-  });
+  const [movie, setMovie] = useState<Movies[]>([]);
 
-  const [movie, setMovie] = useState([]);
+  const { data } = useNowPlayingMoviesQuery();
 
   useEffect(() => {
-    if (!data?.results) return;
-    setMovie(data?.results.slice(0, 4).map((movie) => ({ ...movie })));
-  }, [data?.results]);
+    if (!data) return;
+    setMovie(data?.slice(0, 4).map((movie) => ({ ...movie })));
+  }, [data]);
   // 리액트에서는 깊은 복사를 한 뒤 넣어주기
 
   console.log(movie);
