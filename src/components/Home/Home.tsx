@@ -9,11 +9,9 @@ const Home = () => {
 
   useEffect(() => {
     if (!data) return;
-    setMovie(data?.slice(0, 4).map((movie) => ({ ...movie })));
+    setMovie(data?.results.slice(0, 4).map((movie) => ({ ...movie })));
   }, [data]);
   // 리액트에서는 깊은 복사를 한 뒤 넣어주기
-
-  console.log(movie);
 
   return (
     <>

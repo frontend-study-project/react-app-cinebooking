@@ -4,7 +4,7 @@ import { Movies } from "../types";
 
 // api를 호출하는 역할
 export const useNowPlayingMoviesQuery = () => {
-  return useQuery<Movies[]>({
+  return useQuery<{ results: Movies[] }>({
     queryKey: ["movie"],
     queryFn: getNowPlayingMovies,
   });
