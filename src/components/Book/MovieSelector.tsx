@@ -67,21 +67,6 @@ const MovieSelector = () => {
     }
   }, [selectMovie, selectRegion, selectTheater, selectDate]);
 
-  useEffect(() => {
-    if (selectMovie > -1) {
-      if (startDate && endDate) {
-        if (isDateBetween(startDate, endDate, `${selectDate.year}-${selectDate.month}-${selectDate.day}`)) {
-          dispatch(setSelectDate({
-            year: 0,
-            month: 0,
-            day: 0,
-            dayOfWeek: '',
-          }));
-        }
-      }
-    }
-  }, [selectMovie]);
-
   return (
     <Box>
       {loading ? (
@@ -95,7 +80,14 @@ const MovieSelector = () => {
             <div className="bg-gray-200 text-center font-bold leading-[40px]">시간</div>
             <ul className="bg-gray-200 pl-2 overflow-y-auto scrollbar-thin scrollbar-thumb-black-a">
               {movies.map((movie, key) => (
-                <li key={key} className={`flex flex-row items-center w-full p-2 cursor-pointer ${selectMovie === movie.id ? 'font-bold bg-selected' : ''}`} onClick={() => dispatch(setSelectMovie(movie.id))}>
+                <li
+                  key={key}
+                  className={`flex flex-row items-center w-full p-2
+                    ${selectMovie === movie.id ? 'font-bold bg-selected' : ''}
+                    ${selectDate.day === 0 || isDateBetween(movie.release_date, getMovieEndDate(movie.release_date), `${selectDate.year}-${selectDate.month}-${selectDate.day}`) ? 'cursor-pointer' : 'opacity-30'}
+                  `}
+                  onClick={selectDate.day === 0 || isDateBetween(movie.release_date, getMovieEndDate(movie.release_date), `${selectDate.year}-${selectDate.month}-${selectDate.day}`) ? () => dispatch(setSelectMovie(movie.id)) : undefined}
+                >
                   <AgeChip age="ALL" />
                   <span className="pl-2 truncate ...">{movie.title}</span>
                 </li>
