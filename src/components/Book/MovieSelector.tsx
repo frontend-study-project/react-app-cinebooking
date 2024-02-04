@@ -9,8 +9,13 @@ import { useNowPlayingMoviesQuery } from '../../hooks/useMovie';
 import { Movies, groupedScreen } from '../../types';
 import { isDateBetween } from "../../utils/isDateBetween";
 import { getScreens } from "../../utils/getScreens";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectDate, setSelectMovie, setSelectTheater } from "../../slices/bookSlice";
+import { RootState } from "../../store";
 
 const MovieSelector = () => {
+  const dispatch = useDispatch();
+
   const { data } = useNowPlayingMoviesQuery();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,15 +23,10 @@ const MovieSelector = () => {
   const dates = getDates();
   const [screens, setScreens] = useState<groupedScreen[] | undefined>();
 
-  const [selectMovie, setSelectMovie] = useState<number>(-1);
+  const selectMovie = useSelector((state: RootState) => state.book.selectMovie);
   const [selectRegion, setSelectRegion] = useState<number>(0);
-  const [selectTheater, setSelectTheater] = useState<string>('');
-  const [selectDate, setSelectDate] = useState({
-    year: 0,
-    month: 0,
-    day: 0,
-    dayOfWeek: '',
-  });
+  const selectTheater = useSelector((state: RootState) => state.book.selectTheater);
+  const selectDate = useSelector((state: RootState) => state.book.selectDate);
   const [selectScreen, setSelecScreen] = useState<number>(-1);
 
   const [startDate, setStartDate] = useState<string>('');
@@ -38,7 +38,7 @@ const MovieSelector = () => {
   const handleRegionClick = (key: number) => {
     if (key !== selectRegion) {
       setSelectRegion(key);
-      setSelectTheater('');
+      dispatch(setSelectTheater(''));
     }
   };
 
@@ -59,7 +59,6 @@ const MovieSelector = () => {
     }
 
     if (selectMovie > -1 && selectRegion >= -1 && selectTheater !== '' && selectDate.day > 0) {
-      console.log(getScreens(selectTheater));
       setScreens(getScreens(selectTheater));
       setIsActiveScreen(true);
     }
@@ -72,12 +71,12 @@ const MovieSelector = () => {
     if (selectMovie > -1) {
       if (startDate && endDate) {
         if (isDateBetween(startDate, endDate, `${selectDate.year}-${selectDate.month}-${selectDate.day}`)) {
-          setSelectDate({
+          dispatch(setSelectDate({
             year: 0,
             month: 0,
             day: 0,
             dayOfWeek: '',
-          });
+          }));
         }
       }
     }
@@ -96,7 +95,7 @@ const MovieSelector = () => {
             <div className="bg-gray-200 text-center font-bold leading-[40px]">시간</div>
             <ul className="bg-gray-200 pl-2 overflow-y-auto scrollbar-thin scrollbar-thumb-black-a">
               {movies.map((movie, key) => (
-                <li key={key} className={`flex flex-row items-center w-full p-2 cursor-pointer ${selectMovie === movie.id ? 'font-bold bg-selected' : ''}`} onClick={() => setSelectMovie(movie.id)}>
+                <li key={key} className={`flex flex-row items-center w-full p-2 cursor-pointer ${selectMovie === movie.id ? 'font-bold bg-selected' : ''}`} onClick={() => dispatch(setSelectMovie(movie.id))}>
                   <AgeChip age="ALL" />
                   <span className="pl-2 truncate ...">{movie.title}</span>
                 </li>
@@ -112,7 +111,7 @@ const MovieSelector = () => {
               </ul>
               <ul className="w-1/2 overflow-y-auto scrollbar-thin scrollbar-thumb-black-a">
                 {groupedTheater[selectRegion].theater.map((v, key) => (
-                  <li className={`w-full p-2 text-center cursor-pointer truncate ... ${selectTheater === v.id ? 'bg-selected font-bold' : ''}`} key={key} onClick={() => setSelectTheater(v.id)}>
+                  <li className={`w-full p-2 text-center cursor-pointer truncate ... ${selectTheater === v.id ? 'bg-selected font-bold' : ''}`} key={key} onClick={() => dispatch(setSelectTheater(v.id))}>
                     {v.name.slice(0, -1)}
                   </li>
                 ))}
@@ -127,7 +126,7 @@ const MovieSelector = () => {
                     ${selectMovie === -1 || isDateBetween(startDate, endDate, `${v.year}-${v.month}-${v.day}`) ? 'cursor-pointer' : 'opacity-30'}
                   `}
                   key={key}
-                  onClick={selectMovie === -1 || isDateBetween(startDate, endDate, `${v.year}-${v.month}-${v.day}`) ? () => setSelectDate(v) : undefined}
+                  onClick={selectMovie === -1 || isDateBetween(startDate, endDate, `${v.year}-${v.month}-${v.day}`) ? () => dispatch(setSelectDate(v)) : undefined}
                 >
                   <span className={`pr-2 ${JSON.stringify(selectDate) === JSON.stringify(v) ? 'font-bold' : ''}`}>{v.dayOfWeek}</span>
                   <span className="text-lg font-bold">{v.day}</span>

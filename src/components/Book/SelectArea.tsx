@@ -1,6 +1,14 @@
-import {FaAngleRight, FaArrowRight} from "react-icons/fa";
+import { FaAngleRight, FaArrowRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { setActiveSeatSelector } from "../../slices/bookSlice";
 
 const SelectArea = () => {
+  const dispatch = useDispatch();
+
+  const handleNextButtonClick = () => {
+    dispatch(setActiveSeatSelector(true))
+  };
+
   return (
     <div className='flex justify-between items-center w-full h-[100px] mt-2 bg-gray-200 text-black-1'>
       <div className='flex flex-row items-center gap-5 ml-5'>
@@ -12,7 +20,10 @@ const SelectArea = () => {
         <FaAngleRight />
         <span>예매</span>
       </div>
-      <div className='flex flex-col justify-center items-center w-[85px] h-[85px] mr-3 border border-black-1 rounded-xl cursor-pointer'>
+      <div
+        className='flex flex-col justify-center items-center w-[85px] h-[85px] mr-3 border border-black-1 rounded-xl cursor-pointer'
+        onClick={handleNextButtonClick}
+      >
         <FaArrowRight className='text-3xl' />
         <span className='pt-2 font-bold'>좌석선택</span>
       </div>
