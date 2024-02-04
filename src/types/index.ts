@@ -50,6 +50,7 @@ export interface Screen {
 export interface Reservation {
   id: string;
   user_id: string;
+  movie_id: string;
   screen_id: string;
   price: number;
   isActived: boolean;
@@ -72,4 +73,13 @@ export interface FormattedDate {
   month: number;
   day: number;
   dayOfWeek: string;
+}
+
+export interface groupedScreen {
+  // movie_id: number;
+  theater_id: string;
+  auditorium_id: string;
+  date: string;
+  startTime: string[];
+  // endTime: string[];
 }
