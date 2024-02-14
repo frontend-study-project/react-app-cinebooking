@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getNowPlayingMovies } from "../utils/http";
+import {
+  getNowPlayingMovies,
+  getPopularMovies,
+  getUpcomingMovies,
+} from "../utils/http";
 import { Movies } from "../types";
 
 // api를 호출하는 역할
@@ -7,6 +11,18 @@ export const useNowPlayingMoviesQuery = () => {
   return useQuery<{ results: Movies[] }>({
     queryKey: ["movie"],
     queryFn: getNowPlayingMovies,
+  });
+};
+export const usePopularMoviesQuery = () => {
+  return useQuery<{ results: Movies[] }>({
+    queryKey: ["movie"],
+    queryFn: getPopularMovies,
+  });
+};
+export const useUpcomingMoviesQuery = () => {
+  return useQuery<{ results: Movies[] }>({
+    queryKey: ["movie"],
+    queryFn: getUpcomingMovies,
   });
 };
 
