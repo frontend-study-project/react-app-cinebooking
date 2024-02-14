@@ -1,0 +1,13 @@
+/* header .logo{
+  height: 50px;
+} */
+header .logo img{
+  max-height: 100%;
+}
+.movie .group{
+  border-radius: 20px;
+  overflow: hidden;
+}
+.movie .release-date {
+  font-size: 12px;
+}
