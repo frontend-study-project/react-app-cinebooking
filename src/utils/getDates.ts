@@ -24,7 +24,7 @@ export const getDates = (): FormattedDate[] => {
   const today: Date = new Date();
   const dates: FormattedDate[] = [formatDate(today)];
 
-  for (let i: number = 1; i < 14; i++) {
+  for (let i: number = 1; i < 30; i++) {
     let nextDay: Date = new Date(today);
     nextDay.setDate(today.getDate() + i);
     dates.push(formatDate(nextDay));
