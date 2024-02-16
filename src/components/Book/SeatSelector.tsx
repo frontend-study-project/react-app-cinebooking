@@ -19,7 +19,7 @@ const SeatSelector = () => {
 
           <div className="flex-1 flex flex-column align-center">
             <div className="w-64">
-              <label htmlFor="select-movie" className="block text-sm font-medium text-gray-700">영화선택</label>
+              <label htmlFor="select-movie" className="block text-sm font-medium text-gray-700">인원선택</label>
               <select id="select-movie" name="영화"
                       className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:border-blue-500">
                 <option value="option1">옵션 1</option>
