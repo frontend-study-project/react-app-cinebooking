@@ -5,6 +5,7 @@ interface bookState {
   selectMovie: number;
   selectTheater: string;
   selectDate: FormattedDate;
+  selectScreen: number;
   activeNext: boolean;
   activeSeatSelector: boolean;
 }
@@ -18,6 +19,7 @@ const initialState: bookState = {
     day: 0,
     dayOfWeek: "",
   },
+  selectScreen: 999,
   activeNext: false,
   activeSeatSelector: false,
 };
@@ -35,11 +37,14 @@ const bookSlice = createSlice({
     setSelectDate: (state, action) => {
       state.selectDate = action.payload;
     },
+    setSelectScreen: (state, action) => {
+      state.selectScreen = action.payload;
+    },
     setActiveSeatSelector: (state, action) => {
       state.activeSeatSelector = action.payload;
     },
   },
 });
 
-export const { setSelectMovie, setSelectTheater, setSelectDate, setActiveSeatSelector } = bookSlice.actions;
+export const { setSelectMovie, setSelectTheater, setSelectDate, setSelectScreen, setActiveSeatSelector } = bookSlice.actions;
 export default bookSlice.reducer;

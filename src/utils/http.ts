@@ -45,3 +45,15 @@ export const getUpcomingMovies = async () => {
     console.error("Error fetching movie data:", err);
   }
 };
+
+export const getMovieDetails = async (id: number) => {
+  try {
+    const res = await fetch(
+      `${BASE_PATH}/movie/${id}?language=${BASE_LANG}-${BASE_REGION}&page=1`,
+      options
+    );
+    return res.json();
+  } catch (err) {
+    console.error("Error fetching movie data:", err);
+  }
+};

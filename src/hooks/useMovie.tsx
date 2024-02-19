@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  getMovieDetails,
   getNowPlayingMovies,
   getPopularMovies,
   getUpcomingMovies,
@@ -23,6 +24,13 @@ export const useUpcomingMoviesQuery = () => {
   return useQuery<{ results: Movies[] }>({
     queryKey: ["movie"],
     queryFn: getUpcomingMovies,
+  });
+};
+
+export const useMovieDetailsQuery = (id: number) => {
+  return useQuery({
+    queryKey: ['movie', 'detail', id],
+    queryFn: () => getMovieDetails(id),
   });
 };
 
