@@ -85,10 +85,10 @@ export interface groupedScreen {
 }
 export interface LoginForm {
   email: string;
-  password: string
+  password: string | number;
 }
 export interface JoinForm {
   email: string;
-  password: number,
-  passwordCheck: number
+  password: string | number;
+  passwordCheck: string | number;
 }
