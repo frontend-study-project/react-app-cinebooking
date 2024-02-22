@@ -1,12 +1,14 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { JoinForm } from "../types";
+
 const JoinPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues
-  } = useForm({ mode: "onChange" });
-  const onSubmit = (data) => {
+  } = useForm<JoinForm>({ mode: "onChange" });
+  const onSubmit: SubmitHandler<JoinForm> = (data) => {
     console.log(data)
   }
   return (

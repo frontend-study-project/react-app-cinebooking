@@ -1,11 +1,12 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { LoginForm } from "../types";
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({ mode: "onChange" });
-  const onSubmit = (data) => {
+  } = useForm<LoginForm>({ mode: "onChange" });
+  const onSubmit: SubmitHandler<LoginForm> = (data) => {
     console.log(data)
   }
   return (
