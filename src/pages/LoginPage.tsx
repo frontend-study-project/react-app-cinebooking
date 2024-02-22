@@ -1,21 +1,27 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginForm } from "../types";
 import { useDispatch } from "react-redux";
-import { login } from  '../slices/authSlice'
+import { login } from  '../slices/authSlice';
+import useStorage from "../hooks/useStorage";
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const {
+    setStorage
+  } = useStorage();
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<LoginForm>({ mode: "onChange" });
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
-    dispatch(login({
+    const loginInfo = {
       isLoggedIn: true,
       username: data.email,
       password: data.password
-      }
-    ))
+    }
+    dispatch(login(loginInfo))
+    // Save the dispatched data to local storage
+    setStorage('dispatchedData', JSON.stringify(loginInfo));
   }
   return (
     <div className="h-screen flex items-center justify-center">
