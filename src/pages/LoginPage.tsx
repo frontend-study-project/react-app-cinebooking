@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginForm } from "../types";
 import { useDispatch } from "react-redux";
-import { login } from  '../slices/authSlice';
+import { login } from '../slices/loginSlice';
 import useStorage from "../hooks/useStorage";
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const LoginPage = () => {
     }
     dispatch(login(loginInfo))
     // Save the dispatched data to local storage
-    setStorage('dispatchedData', JSON.stringify(loginInfo));
+    setStorage('loginUser', JSON.stringify(loginInfo));
   }
   return (
     <div className="h-screen flex items-center justify-center">

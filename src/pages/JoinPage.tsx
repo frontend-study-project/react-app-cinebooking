@@ -1,7 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { JoinForm } from "../types";
+import { useDispatch } from "react-redux";
+import useStorage from "../hooks/useStorage";
+import { join } from '../slices/joinSlice';
 
 const JoinPage = () => {
+  const dispatch = useDispatch();
+  const { setStorage } = useStorage();
   const {
     register,
     handleSubmit,
@@ -9,7 +14,14 @@ const JoinPage = () => {
     getValues
   } = useForm<JoinForm>({ mode: "onChange" });
   const onSubmit: SubmitHandler<JoinForm> = (data) => {
-    console.log(data)
+    console.log(data);
+    const joinInfo = {
+      username: data.email,
+      password: data.password,
+      passwordCheck: data.passwordCheck
+    }
+    dispatch(join(joinInfo));
+    setStorage('joinUser', JSON.stringify(joinInfo));
   }
   return (
     <div className="h-screen flex items-center justify-center">
