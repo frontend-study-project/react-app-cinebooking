@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import itemReducer from "../slices/itemsSlice";
+import authReducer from "../slices/authSlice";
 import bookReducer from "../slices/bookSlice";
 
 export const store = configureStore({
   reducer: {
-    item: itemReducer,
+    auth: authReducer,
     book: bookReducer,
   },
   middleware: (getDefaultMiddleware) =>

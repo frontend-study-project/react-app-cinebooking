@@ -1,13 +1,21 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginForm } from "../types";
+import { useDispatch } from "react-redux";
+import { login } from  '../slices/authSlice'
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<LoginForm>({ mode: "onChange" });
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
-    console.log(data)
+    dispatch(login({
+      isLoggedIn: true,
+      username: data.email,
+      password: data.password
+      }
+    ))
   }
   return (
     <div className="h-screen flex items-center justify-center">
