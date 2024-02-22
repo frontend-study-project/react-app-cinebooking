@@ -42,7 +42,7 @@ const JoinPage = () => {
                 }
               })}
             />
-            {errors.email && <small role="alert">{errors.email.message}</small>}
+            {errors.email && <small className="text-xs text-red-500" role="alert">{errors.email.message}</small>}
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="block text-sm font-medium text-gray-600">비밀번호</label>
@@ -59,7 +59,7 @@ const JoinPage = () => {
                 }
               })}
             />
-            {errors.password && <small role="alert">{errors.password.message}</small>}
+            {errors.password && <small className="text-xs text-red-500" role="alert">{errors.password.message}</small>}
           </div>
           <div className="mb-4">
             <label htmlFor="passwordCheck" className="block text-sm font-medium text-gray-600">비밀번호 확인</label>
@@ -83,7 +83,7 @@ const JoinPage = () => {
                 }
               })}
             />
-            {errors.passwordCheck && <small role="alert">{errors.passwordCheck.message}</small>}
+            {errors.passwordCheck && <small className="text-xs text-red-500" role="alert">{errors.passwordCheck.message}</small>}
           </div>
           <button className="w-full mt-1 bg-pink-300 p-1 rounded" type="submit">회원가입</button>
         </form>
