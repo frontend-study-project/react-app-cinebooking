@@ -1,27 +1,15 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginForm } from "../types";
-import { useDispatch } from "react-redux";
-import { login } from '../slices/loginSlice';
-import useStorage from "../hooks/useStorage";
+import { useLoginMutation } from "../hooks/useAuth";
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const {
-    setStorage
-  } = useStorage();
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<LoginForm>({ mode: "onChange" });
+  const loginMutation = useLoginMutation();
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
-    const loginInfo = {
-      isLoggedIn: true,
-      username: data.email,
-      password: data.password
-    }
-    dispatch(login(loginInfo))
-    // Save the dispatched data to local storage
-    setStorage('loginUser', JSON.stringify(loginInfo));
+    loginMutation.mutate(data);
   }
   return (
     <div className="h-screen flex items-center justify-center">
@@ -34,7 +22,7 @@ const LoginPage = () => {
               id="email"
               type="text"
               placeholder="test@email.com"
-              {...register("email", {
+              {...register("userId", {
                 required: "이메일은 필수 입력사항입니다.",
                 pattern: {
                   value: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
@@ -42,7 +30,7 @@ const LoginPage = () => {
                 }
               })}
             />
-            {errors.email && <small className="text-xs text-red-500" role="alert">{errors.email.message}</small>}
+            {errors.userId && <small className="text-xs text-red-500" role="alert">{errors.userId.message}</small>}
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="block text-sm font-medium text-gray-600">비밀번호</label>

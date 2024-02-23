@@ -1,28 +1,30 @@
-export const loginApi = () => {
-  fetch('/auth/cine/login', {
+import { JoinForm } from "../types";
+import { LoginForm } from "../types";
+
+export const loginApi = (form: LoginForm) => {
+  return fetch('api/auth/login', {
     method: 'POST',
-    body: JSON.stringify({
-      email: this.state.user.id,
-      password: this.state.user.password
-    })
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
   })
-    .then((response) => response.json())
-    .then((result) =>
-      console.log("결과:", result)
-    )
+    .then((response) => {
+      if(!response.ok) throw new Error();
+      return response.json();
+    })
 }
 
-export const joinApi = () => {
-  fetch('/auth/cine/join', {
+export const joinApi = (form: JoinForm) => {
+  return fetch('api/auth/join', {
     method: 'POST',
-    body: JSON.stringify({
-      email: this.state.user.email,
-      password: this.state.user.password,
-      passwordCheck: this.state.user.passwordCheck
-    })
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify(form)
   })
-    .then((response) => response.json())
-    .then((result) =>
-      console.log("결과:", result)
-    )
+    .then((response) => {
+      if(!response.ok) throw new Error();
+      return response.json();
+    })
 }

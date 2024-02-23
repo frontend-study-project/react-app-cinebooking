@@ -84,11 +84,12 @@ export interface groupedScreen {
   // endTime: string[];
 }
 export interface LoginForm {
-  email: string;
-  password: string | number;
+  "userId": string,
+  "password": string
 }
 export interface JoinForm {
-  email: string;
-  password: string | number;
-  passwordCheck: string | number;
+  userId: string;
+  nickname: string;
+  password: string;
+  passwordConfirm: string;
 }
