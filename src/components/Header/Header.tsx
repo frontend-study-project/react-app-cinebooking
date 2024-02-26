@@ -1,16 +1,33 @@
 import { Link } from "react-router-dom";
 import "../../style/header.css";
+import { useFetchAuthQuery } from "../../hooks/useAuth";
 
 const LoginBefore = () => {
+  const user = useFetchAuthQuery();
+  console.log(user.data)
   return (
     <nav className="gnb">
       <Link to="/booking">바로예약</Link>
       <Link to="/join" className="ml-3">
         회원가입
       </Link>
-      <Link to="/login" className="ml-3">
-        로그인
-      </Link>
+      {
+        user.data?
+          (
+            <>
+              <Link to="/login" className="ml-3">
+                로그아웃
+              </Link>
+              <div>아이디: {user.data.userId}</div>
+            </>
+
+          ) :
+          (
+            <Link to="/login" className="ml-3">
+              로그인
+            </Link>
+          )
+      }
     </nav>
   );
 };

@@ -93,3 +93,8 @@ export interface JoinForm {
   password: string;
   passwordConfirm: string;
 }
+export interface User {
+    id: number;
+    userId:  string;
+    nickname: string;
+}
