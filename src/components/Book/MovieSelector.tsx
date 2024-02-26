@@ -16,9 +16,8 @@ import { RootState } from "../../store";
 const MovieSelector = () => {
   const dispatch = useDispatch();
 
-  const { data } = useNowPlayingMoviesQuery();
+  const { data, isLoading } = useNowPlayingMoviesQuery();
 
-  const [loading, setLoading] = useState<boolean>(true);
   const [movies, setMovies] = useState<Movies[]>([]);
   const dates = getDates();
   const [screens, setScreens] = useState<groupedScreen[] | undefined>();
@@ -27,13 +26,12 @@ const MovieSelector = () => {
   const [selectRegion, setSelectRegion] = useState<number>(0);
   const selectTheater = useSelector((state: RootState) => state.book.selectTheater);
   const selectDate = useSelector((state: RootState) => state.book.selectDate);
-  const [selectScreen, setSelecScreen] = useState<number>(-1);
+  const selectScreen = useSelector((state: RootState) => state.book.selectScreen);
 
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
 
   const [isActiveScreen, setIsActiveScreen] = useState<boolean>(false);
-  const [isActiveNext, setIsActiveNext] = useState<boolean>(false);
 
   const handleRegionClick = (key: number) => {
     if (key !== selectRegion) {
@@ -45,7 +43,6 @@ const MovieSelector = () => {
   useEffect(() => {
     if (!data) return;
     setMovies(data?.results.map((movie) => ({ ...movie })));
-    setLoading(false);
   }, [data]);
 
   useEffect(() => {
@@ -69,7 +66,7 @@ const MovieSelector = () => {
 
   return (
     <Box>
-      {loading ? (
+      {isLoading ? (
         <>로딩중</>
       ) : (
         <>
