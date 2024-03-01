@@ -6,12 +6,12 @@ import { groupedTheater } from '../../data/groupedTheater';
 import { getDates } from '../../utils/getDates';
 import { getMovieEndDate } from '../../utils/getMovieEndDate';
 import { useNowPlayingMoviesQuery } from '../../hooks/useMovie';
-import { Movies, groupedScreen } from '../../types';
-import { isDateBetween } from "../../utils/isDateBetween";
-import { getScreens } from "../../utils/getScreens";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectDate, setSelectMovie, setSelectTheater } from "../../slices/bookSlice";
-import { RootState } from "../../store";
+import { GroupedScreen, Movies } from '../../types';
+import { isDateBetween } from '../../utils/isDateBetween';
+import { getScreens } from '../../utils/getScreens';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectDate, setSelectMovie, setSelectTheater } from '../../slices/bookSlice';
+import { RootState } from '../../store';
 
 const MovieSelector = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const MovieSelector = () => {
 
   const [movies, setMovies] = useState<Movies[]>([]);
   const dates = getDates();
-  const [screens, setScreens] = useState<groupedScreen[] | undefined>();
+  const [groupedScreens, setGroupedScreens] = useState<GroupedScreen | undefined>();
 
   const selectMovie = useSelector((state: RootState) => state.book.selectMovie);
   const [selectRegion, setSelectRegion] = useState<number>(0);
@@ -47,7 +47,7 @@ const MovieSelector = () => {
 
   useEffect(() => {
     if (selectMovie > -1) {
-      const startDate = movies.find(v => v.id === selectMovie)?.release_date;
+      const startDate = movies.find((v) => v.id === selectMovie)?.release_date;
 
       if (startDate) {
         setStartDate(startDate);
@@ -56,10 +56,9 @@ const MovieSelector = () => {
     }
 
     if (selectMovie > -1 && selectRegion >= -1 && selectTheater !== '' && selectDate.day > 0) {
-      setScreens(getScreens(selectTheater));
+      setGroupedScreens(getScreens(movies.findIndex((v) => v.id === selectMovie), selectTheater));
       setIsActiveScreen(true);
-    }
-    else {
+    } else {
       setIsActiveScreen(false);
     }
   }, [selectMovie, selectRegion, selectTheater, selectDate]);
@@ -123,20 +122,20 @@ const MovieSelector = () => {
               ))}
             </ul>
             <div className="px-3 bg-gray-200 text-black-1 overflow-y-auto scrollbar-thin scrollbar-thumb-black-a divide-y divide-white">
-              {isActiveScreen ? (
+              {isActiveScreen && groupedScreens ? (
                 <>
-                  {screens?.map((screen, key) => (
+                  {Object.entries(groupedScreens).map(([auditorium_id, screens], key) => (
                     <div key={key} className="pt-2 pb-4">
                       <span className="block mb-2">
-                        <b className="pr-1">{screen.auditorium_id}</b>(총75석)
+                        <b className="pr-1">{auditorium_id}</b>(총75석)
                       </span>
                       <ul className="flex flex-row flex-wrap gap-x-4 gap-y-3">
-                        {screen.startTime.map((v, key) => (
+                        {screens.map((screen, key) => (
                           <li key={key} className="flex flex-row items-center group relative">
                             <div className="absolute left-0 bottom-[calc(100%+3px)] hidden group-hover:block">
                               <div className="px-2 py-1 bg-black-1 text-white text-xs rounded whitespace-nowrap">종료 12:42</div>
                             </div>
-                            <button className={`mr-1 px-1.5 py-0.5 border border-black-a ${selectScreen === key ? 'bg-selected' : ''}`}>{v}</button>
+                            <button className={`mr-1 px-1.5 py-0.5 border border-black-a ${selectScreen === '아이디' ? 'bg-selected' : ''}`}>{screen.startTime}</button>
                             <span className="text-xs">63석</span>
                           </li>
                         ))}

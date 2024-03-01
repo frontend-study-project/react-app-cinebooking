@@ -5,7 +5,7 @@ interface bookState {
   selectMovie: number;
   selectTheater: string;
   selectDate: FormattedDate;
-  selectScreen: number;
+  selectScreen: string;
   activeNext: boolean;
   activeSeatSelector: boolean;
 }
@@ -19,7 +19,7 @@ const initialState: bookState = {
     day: 0,
     dayOfWeek: "",
   },
-  selectScreen: 999,
+  selectScreen: "",
   activeNext: false,
   activeSeatSelector: false,
 };

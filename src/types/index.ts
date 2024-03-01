@@ -67,12 +67,11 @@ export interface Seat {
 }
 
 export interface Screen {
-  movie_id: number;
+  id: string;
+  movie_idx: number;
   theater_id: string;
   auditorium_id: string;
-  date: string;
   startTime: string;
-  endTime: string;
 }
 
 export interface Reservation {
@@ -96,6 +95,10 @@ export interface GroupedTheater {
   theater: { id: string; name: string }[];
 }
 
+export interface GroupedScreen {
+  [auditorium_id: string]: Screen[];
+};
+
 export interface FormattedDate {
   year: number;
   month: number;
@@ -103,14 +106,6 @@ export interface FormattedDate {
   dayOfWeek: string;
 }
 
-export interface groupedScreen {
-  // movie_id: number;
-  theater_id: string;
-  auditorium_id: string;
-  date: string;
-  startTime: string[];
-  // endTime: string[];
-}
 export interface LoginForm {
   "userId": string,
   "password": string

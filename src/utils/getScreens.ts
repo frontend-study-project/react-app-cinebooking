@@ -1,19 +1,19 @@
-import { groupedScreen } from "../types";
+import { screens } from "../data/screens";
+import { GroupedScreen, Screen } from "../types";
 
-export const getScreens = (theater_id: string): groupedScreen[] => {
-  const screens = [];
+export const getScreens = (movie_idx: number, theater_id: string): GroupedScreen => {
+  const filteredScreens = screens.filter(
+    (screen: Screen) => screen.movie_idx === movie_idx && screen.theater_id === theater_id
+  );
+  const groupedScreens: GroupedScreen = {};
 
-  const startTime = ["09:00", "13:00", "17:00"];
+  filteredScreens.forEach((screen) => {
+    const { auditorium_id } = screen;
 
-  // screens.push(startTime);
+    if (!groupedScreens[auditorium_id]) groupedScreens[auditorium_id] = [];
 
-  // return screens;
-  return [
-    {
-      theater_id: theater_id,
-      auditorium_id: "T0001",
-      date: "2024-02-04",
-      startTime,
-    },
-  ];
+    groupedScreens[auditorium_id].push(screen);
+  });
+
+  return groupedScreens;
 };
