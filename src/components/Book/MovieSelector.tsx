@@ -2,48 +2,67 @@ import { useEffect, useState } from 'react';
 import Box from '../UI/Box';
 import AgeChip from '../Common/AgeChip';
 import SelectArea from './SelectArea';
-import { groupedTheater } from '../../data/groupedTheater';
 import { getDates } from '../../utils/getDates';
 import { getMovieEndDate } from '../../utils/getMovieEndDate';
 import { useNowPlayingMoviesQuery } from '../../hooks/useMovie';
-import { GroupedScreen, Movies } from '../../types';
+import { GroupedScreen, GroupedTheater, Movies, Theater } from '../../types';
 import { isDateBetween } from '../../utils/isDateBetween';
 import { getScreens } from '../../utils/getScreens';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectDate, setSelectMovie, setSelectTheater } from '../../slices/bookSlice';
 import { RootState } from '../../store';
+import { useTheaterListQuery } from "../../hooks/useTheater";
+import Loading from "../Common/Loading";
 
 const MovieSelector = () => {
   const dispatch = useDispatch();
 
-  const { data, isLoading } = useNowPlayingMoviesQuery();
-
-  const [movies, setMovies] = useState<Movies[]>([]);
-  const dates = getDates();
-  const [groupedScreens, setGroupedScreens] = useState<GroupedScreen | undefined>();
-
   const selectMovie = useSelector((state: RootState) => state.book.selectMovie);
-  const [selectRegion, setSelectRegion] = useState<number>(0);
+  const [selectRegion, setSelectRegion] = useState<string>("경기");
   const selectTheater = useSelector((state: RootState) => state.book.selectTheater);
   const selectDate = useSelector((state: RootState) => state.book.selectDate);
   const selectScreen = useSelector((state: RootState) => state.book.selectScreen);
+
+  const nowPlayingMoviesData = useNowPlayingMoviesQuery().data;
+  const groupedTheatersData = useTheaterListQuery("").data;
+  const theatersData = useTheaterListQuery(selectRegion).data;
+
+  const [loading, setLoading] = useState(true);
+  const [movies, setMovies] = useState<Movies[]>([]);
+  const [groupedTheaters, setGroupedTheaters] = useState<GroupedTheater[]>([]);
+  const [theaters, setTheaters] = useState<Theater[]>([]);
+  const dates = getDates();
+  const [groupedScreens, setGroupedScreens] = useState<GroupedScreen | undefined>();
 
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
 
   const [isActiveScreen, setIsActiveScreen] = useState<boolean>(false);
 
-  const handleRegionClick = (key: number) => {
-    if (key !== selectRegion) {
-      setSelectRegion(key);
-      dispatch(setSelectTheater(''));
+  const handleRegionClick = (region: string) => {
+    if (region !== selectRegion) {
+      setSelectRegion(region);
+      dispatch(setSelectTheater(-1));
     }
   };
 
   useEffect(() => {
-    if (!data) return;
-    setMovies(data?.results.map((movie) => ({ ...movie })));
-  }, [data]);
+    console.log("렌더링");
+    console.log(groupedScreens);
+  });
+
+  useEffect(() => {
+    setLoading(true);
+    if (!nowPlayingMoviesData || !groupedTheatersData) return;
+    setMovies(nowPlayingMoviesData.results);
+    setGroupedTheaters(groupedTheatersData);
+    setLoading(false);
+  }, [nowPlayingMoviesData, groupedTheatersData]);
+
+  useEffect(() => {
+    if (!theatersData) return;
+    setTheaters(theatersData[0].theaters);
+  }, [theatersData]);
 
   useEffect(() => {
     if (selectMovie > -1) {
@@ -55,7 +74,7 @@ const MovieSelector = () => {
       }
     }
 
-    if (selectMovie > -1 && selectRegion >= -1 && selectTheater !== '' && selectDate.day > 0) {
+    if (selectMovie > -1 && selectRegion !== '' && selectTheater !== -1 && selectDate.day > 0) {
       setGroupedScreens(getScreens(movies.findIndex((v) => v.id === selectMovie), selectTheater));
       setIsActiveScreen(true);
     } else {
@@ -64,11 +83,11 @@ const MovieSelector = () => {
   }, [selectMovie, selectRegion, selectTheater, selectDate]);
 
   return (
-    <Box>
-      {isLoading ? (
-        <>로딩중</>
+    <>
+      {loading ? (
+        <Loading />
       ) : (
-        <>
+        <Box>
           <div className="grid grid-cols-[3fr_3fr_1fr_3fr] grid-rows-[40px_1fr] gap-1 w-full h-[500px] text-black-1 text-sm">
             <div className="bg-gray-200 text-center font-bold leading-[40px]">영화</div>
             <div className="bg-gray-200 text-center font-bold leading-[40px]">극장</div>
@@ -79,9 +98,9 @@ const MovieSelector = () => {
                 <li
                   key={key}
                   className={`flex flex-row items-center w-full p-2
-                    ${selectMovie === movie.id ? 'font-bold bg-selected' : ''}
-                    ${selectDate.day === 0 || isDateBetween(movie.release_date, getMovieEndDate(movie.release_date), `${selectDate.year}-${selectDate.month}-${selectDate.day}`) ? 'cursor-pointer' : 'opacity-30'}
-                  `}
+                      ${selectMovie === movie.id ? 'font-bold bg-selected' : ''}
+                      ${selectDate.day === 0 || isDateBetween(movie.release_date, getMovieEndDate(movie.release_date), `${selectDate.year}-${selectDate.month}-${selectDate.day}`) ? 'cursor-pointer' : 'opacity-30'}
+                    `}
                   onClick={selectDate.day === 0 || isDateBetween(movie.release_date, getMovieEndDate(movie.release_date), `${selectDate.year}-${selectDate.month}-${selectDate.day}`) ? () => dispatch(setSelectMovie(movie.id)) : undefined}
                 >
                   <AgeChip age="ALL" />
@@ -91,16 +110,16 @@ const MovieSelector = () => {
             </ul>
             <div className="flex bg-gray-200 divide-x-2 divide-white overflow-hidden">
               <ul className="w-1/2 overflow-y-auto scrollbar-thin scrollbar-thumb-black-a">
-                {groupedTheater.map((v, key) => (
-                  <li className={`w-full p-2 text-center cursor-pointer ${selectRegion === key ? 'font-bold' : ''}`} key={key} onClick={() => handleRegionClick(key)}>
-                    {v.address}
+                {groupedTheaters.map((group) => (
+                  <li className={`w-full p-2 text-center cursor-pointer ${selectRegion === group.region ? 'font-bold' : ''}`} key={group.id} onClick={() => handleRegionClick(group.region)}>
+                    {group.region}
                   </li>
                 ))}
               </ul>
               <ul className="w-1/2 overflow-y-auto scrollbar-thin scrollbar-thumb-black-a">
-                {groupedTheater[selectRegion].theater.map((v, key) => (
-                  <li className={`w-full p-2 text-center cursor-pointer truncate ... ${selectTheater === v.id ? 'bg-selected font-bold' : ''}`} key={key} onClick={() => dispatch(setSelectTheater(v.id))}>
-                    {v.name.slice(0, -1)}
+                {theaters.map((theater) => (
+                  <li className={`w-full p-2 text-center cursor-pointer truncate ... ${selectTheater === theater.id ? 'bg-selected font-bold' : ''}`} key={theater.id} onClick={() => dispatch(setSelectTheater(theater.id))}>
+                    {theater.name}
                   </li>
                 ))}
               </ul>
@@ -109,10 +128,10 @@ const MovieSelector = () => {
               {dates.map((v, key) => (
                 <li
                   className={`w-full p-2 text-center 
-                    ${v.dayOfWeek === '토' ? 'text-week-sat' : v.dayOfWeek === '일' ? 'text-week-sun' : 'text-black-1'}
-                    ${JSON.stringify(selectDate) === JSON.stringify(v) ? 'bg-selected' : ''}
-                    ${selectMovie === -1 || isDateBetween(startDate, endDate, `${v.year}-${v.month}-${v.day}`) ? 'cursor-pointer' : 'opacity-30'}
-                  `}
+                      ${v.dayOfWeek === '토' ? 'text-week-sat' : v.dayOfWeek === '일' ? 'text-week-sun' : 'text-black-1'}
+                      ${JSON.stringify(selectDate) === JSON.stringify(v) ? 'bg-selected' : ''}
+                      ${selectMovie === -1 || isDateBetween(startDate, endDate, `${v.year}-${v.month}-${v.day}`) ? 'cursor-pointer' : 'opacity-30'}
+                    `}
                   key={key}
                   onClick={selectMovie === -1 || isDateBetween(startDate, endDate, `${v.year}-${v.month}-${v.day}`) ? () => dispatch(setSelectDate(v)) : undefined}
                 >
@@ -149,9 +168,9 @@ const MovieSelector = () => {
             </div>
           </div>
           <SelectArea />
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   );
 };
 export default MovieSelector;

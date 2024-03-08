@@ -44,18 +44,15 @@ export interface Details {
 }
 
 export interface Theater {
-  id: string;
+  id: number;
   name: string;
-  address_SiDo: string;
-  location_LO: number;
-  location_LA: number;
 }
 
 export interface Auditorium {
   id: string;
   name: string;
   capacity: number;
-  theater_id: string;
+  theater_id: number;
 }
 
 export interface Seat {
@@ -69,7 +66,7 @@ export interface Seat {
 export interface Screen {
   id: string;
   movie_idx: number;
-  theater_id: string;
+  theater_id: number;
   auditorium_id: string;
   startTime: string;
 }
@@ -91,13 +88,14 @@ export interface ReservedSeat {
 }
 
 export interface GroupedTheater {
-  address: string;
-  theater: { id: string; name: string }[];
+  id: number;
+  region: string;
+  theaters: Theater[];
 }
 
 export interface GroupedScreen {
   [auditorium_id: string]: Screen[];
-};
+}
 
 export interface FormattedDate {
   year: number;
@@ -107,8 +105,8 @@ export interface FormattedDate {
 }
 
 export interface LoginForm {
-  "userId": string,
-  "password": string
+  userId: string;
+  password: string;
 }
 export interface JoinForm {
   userId: string;
@@ -117,7 +115,7 @@ export interface JoinForm {
   passwordConfirm: string;
 }
 export interface User {
-    id: number;
-    userId:  string;
-    nickname: string;
+  id: number;
+  userId: string;
+  nickname: string;
 }

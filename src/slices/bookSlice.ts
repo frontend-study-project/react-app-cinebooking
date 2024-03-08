@@ -3,7 +3,7 @@ import { FormattedDate } from "../types";
 
 interface bookState {
   selectMovie: number;
-  selectTheater: string;
+  selectTheater: number;
   selectDate: FormattedDate;
   selectScreen: string;
   activeNext: boolean;
@@ -12,7 +12,7 @@ interface bookState {
 
 const initialState: bookState = {
   selectMovie: -1,
-  selectTheater: "",
+  selectTheater: -1,
   selectDate: {
     year: 0,
     month: 0,

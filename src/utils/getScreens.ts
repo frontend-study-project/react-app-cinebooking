@@ -1,7 +1,7 @@
 import { screens } from "../data/screens";
 import { GroupedScreen, Screen } from "../types";
 
-export const getScreens = (movie_idx: number, theater_id: string): GroupedScreen => {
+export const getScreens = (movie_idx: number, theater_id: number): GroupedScreen => {
   const filteredScreens = screens.filter(
     (screen: Screen) => screen.movie_idx === movie_idx && screen.theater_id === theater_id
   );
