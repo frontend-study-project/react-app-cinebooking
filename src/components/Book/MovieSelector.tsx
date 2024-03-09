@@ -9,10 +9,12 @@ import { GroupedScreen, GroupedTheater, Movies, Theater } from '../../types';
 import { isDateBetween } from '../../utils/isDateBetween';
 import { getScreens } from '../../utils/getScreens';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectDate, setSelectMovie, setSelectTheater } from '../../slices/bookSlice';
+import { setSelectDate, setSelectMovie, setSelectScreen, setSelectTheater } from '../../slices/bookSlice';
 import { RootState } from '../../store';
 import { useTheaterListQuery } from "../../hooks/useTheater";
 import Loading from "../Common/Loading";
+import { isFutureDate } from "../../utils/isFutureDate";
+import { getAuditoriumName } from "../../utils/getAuditoriumName";
 
 const MovieSelector = () => {
   const dispatch = useDispatch();
@@ -48,7 +50,6 @@ const MovieSelector = () => {
 
   useEffect(() => {
     console.log("렌더링");
-    console.log(groupedScreens);
   });
 
   useEffect(() => {
@@ -65,6 +66,8 @@ const MovieSelector = () => {
   }, [theatersData]);
 
   useEffect(() => {
+    dispatch(setSelectScreen(""));
+
     if (selectMovie > -1) {
       const startDate = movies.find((v) => v.id === selectMovie)?.release_date;
 
@@ -146,15 +149,26 @@ const MovieSelector = () => {
                   {Object.entries(groupedScreens).map(([auditorium_id, screens], key) => (
                     <div key={key} className="pt-2 pb-4">
                       <span className="block mb-2">
-                        <b className="pr-1">{auditorium_id}</b>(총75석)
+                        <b className="pr-1">{getAuditoriumName(auditorium_id)}</b>(총75석)
                       </span>
                       <ul className="flex flex-row flex-wrap gap-x-4 gap-y-3">
                         {screens.map((screen, key) => (
                           <li key={key} className="flex flex-row items-center group relative">
-                            <div className="absolute left-0 bottom-[calc(100%+3px)] hidden group-hover:block">
-                              <div className="px-2 py-1 bg-black-1 text-white text-xs rounded whitespace-nowrap">종료 12:42</div>
-                            </div>
-                            <button className={`mr-1 px-1.5 py-0.5 border border-black-a ${selectScreen === '아이디' ? 'bg-selected' : ''}`}>{screen.startTime}</button>
+                            {isFutureDate(`${selectDate.year}/${selectDate.month}/${selectDate.day} ${screen.startTime}`) ? (
+                              <>
+                                <div className="absolute left-0 bottom-[calc(100%+3px)] hidden group-hover:block">
+                                  <div className="px-2 py-1 bg-black-1 text-white text-xs rounded whitespace-nowrap">종료 12:42</div>
+                                </div>
+                                <button
+                                  className={`mr-1 px-1.5 py-0.5 border border-black-a ${selectScreen === screen.id ? "bg-selected" : ""}`}
+                                  onClick={() => dispatch(setSelectScreen(screen.id))}
+                                >{screen.startTime}</button>
+                              </>
+                            ) : (
+                              <span
+                                className="mr-1 px-1.5 py-0.5 border border-black-a line-through"
+                              >{screen.startTime}</span>
+                            )}
                             <span className="text-xs">63석</span>
                           </li>
                         ))}
