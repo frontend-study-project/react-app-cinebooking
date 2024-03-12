@@ -25,7 +25,6 @@ const SelectArea = () => {
   useEffect(() => {
     if (!data) return;
     setDetails(data);
-    console.log(data);
   }, [data]);
 
   return (
@@ -50,14 +49,13 @@ const SelectArea = () => {
         )}
         <FaAngleRight />
         <div>
-          {selectTheater === '' && selectDate.day === 0 ? (
+          {selectTheater === -1 && selectDate.day === 0 ? (
             <span>극장선택</span>
           ) : (
             <div className="flex flex-col gap-1 w-[120px] text-sm">
-              {/* 극장 일시 상영관 인원 */}
               <div className="flex justify-between">
                 <span>극장</span>
-                <span>{selectTheater !== '' ? selectTheater : ''}</span>
+                <span>{selectTheater !== -1 ? selectTheater : ''}</span>
               </div>
               <div className="flex justify-between">
                 <span>일시</span>
@@ -65,7 +63,7 @@ const SelectArea = () => {
               </div>
               <div className="flex justify-between">
                 <span>상영관</span>
-                <span>{selectScreen > -1 ? selectScreen : ''}</span>
+                <span>{selectScreen !== '' ? selectScreen : ''}</span>
               </div>
               <div className="flex justify-between">
                 <span>인원</span>
@@ -79,7 +77,7 @@ const SelectArea = () => {
         <FaAngleRight />
         <span>예매</span>
       </div>
-      <div className={`flex flex-col justify-center items-center w-[85px] h-[85px] mr-3 border border-black-1 rounded-xl ${selectMovie > -1 && selectTheater !== '' && selectDate.day > 0 && selectScreen > -1 ? 'cursor-pointer' : 'opacity-30'}`} onClick={selectMovie > -1 && selectTheater !== '' && selectDate.day > 0 && selectScreen > -1 ? handleNextButtonClick : undefined}>
+      <div className={`flex flex-col justify-center items-center w-[85px] h-[85px] mr-3 border border-black-1 rounded-xl ${selectMovie > -1 && selectTheater !== -1 && selectDate.day > 0 && selectScreen !== "" ? 'cursor-pointer' : 'opacity-30'}`} onClick={selectMovie > -1 && selectTheater !== -1 && selectDate.day > 0 && selectScreen !== "" ? handleNextButtonClick : undefined}>
         <FaArrowRight className="text-3xl" />
         <span className="pt-2 font-bold">좌석선택</span>
       </div>

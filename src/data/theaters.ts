@@ -1,12 +1,6 @@
-interface Theater {
-  id: string;
-  name: string;
-  address_SiDo: string;
-  location_LO: number;
-  location_LA: number;
-}
+import { Theater } from "../types";
 
-export const theater: Theater[] = [
+export const theaters: Theater[] = [
   {
     id: 'T0001',
     name: '북포항점',
