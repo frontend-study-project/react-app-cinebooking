@@ -3,24 +3,29 @@ import { useFetchAuthQuery } from '../../hooks/useAuth';
 
 const LoginBefore = () => {
   const user = useFetchAuthQuery();
-  // console.log(user.data);
+  console.log(user.data);
   return (
     <nav className="gnb text-sm relative z-10">
-      <Link to="/booking">바로예약</Link>
-      <Link to="/join" className="ml-3">
-        회원가입
-      </Link>
       {user.data ? (
         <>
+          <Link to="/reserve" className="ml-3">
+            예매내역
+          </Link>
           <Link to="/login" className="ml-3">
             로그아웃
           </Link>
-          <div>아이디: {user.data.userId}</div>
+          {/* <div>아이디: {user.data.userId}</div> */}
         </>
       ) : (
-        <Link to="/login" className="ml-3">
-          로그인
-        </Link>
+        <>
+          <Link to="/booking">바로예약</Link>
+          <Link to="/join" className="ml-3">
+            회원가입
+          </Link>
+          <Link to="/login" className="ml-3">
+            로그인
+          </Link>
+        </>
       )}
     </nav>
   );
