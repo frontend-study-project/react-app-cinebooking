@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header/Header";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Header from "./components/Common/Header";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Footer from "./components/Common/Footer";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Header />
       <Outlet />
       <ReactQueryDevtools />
+      <Footer />
     </>
   );
 }
