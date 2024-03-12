@@ -5,12 +5,12 @@
 //   - queryKey: ['', ]
 //   - queryFn
 
-import { useQuery } from "@tanstack/react-query";
-import { getReserveList } from "../utils/api/Reserve";
+import { useQuery } from '@tanstack/react-query';
+import { getReserveList } from '../utils/api/reserve.ts';
 
 export const useFetchReservationListQuery = (id: number) => {
   return useQuery({
-    queryKey: ["reserve", id],
+    queryKey: ['reserve', id],
     queryFn: () => {
       return getReserveList(id);
     },

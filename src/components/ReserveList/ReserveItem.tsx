@@ -3,7 +3,7 @@
 // 인원수 (people 추가?하기)
 // 예매한 날짜 가져오기
 
-import { Reserve } from "../../utils/api/Reserve";
+import { Reserve } from '../../utils/api/reserve';
 
 type Props = Reserve;
 
@@ -55,7 +55,7 @@ const ConfirmItem = ({
         </div>
         <div className="flex justify-between w-full border-t mt-10 pt-2">
           <p className="confirmAmount font-bold text-base">
-            총 결제금액{" "}
+            총 결제금액{' '}
             <em className="not-italic text-pink-400 text-lg">
               {Number(money).toLocaleString()}
             </em>
