@@ -3,23 +3,23 @@ import { FormattedDate } from "../types";
 
 interface bookState {
   selectMovie: number;
-  selectTheater: string;
+  selectTheater: number;
   selectDate: FormattedDate;
-  selectScreen: number;
+  selectScreen: string;
   activeNext: boolean;
   activeSeatSelector: boolean;
 }
 
 const initialState: bookState = {
   selectMovie: -1,
-  selectTheater: "",
+  selectTheater: -1,
   selectDate: {
     year: 0,
     month: 0,
     day: 0,
     dayOfWeek: "",
   },
-  selectScreen: 999,
+  selectScreen: "",
   activeNext: false,
   activeSeatSelector: false,
 };

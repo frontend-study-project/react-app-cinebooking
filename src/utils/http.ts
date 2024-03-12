@@ -57,3 +57,18 @@ export const getMovieDetails = async (id: number) => {
     console.error('Error fetching movie data:', err);
   }
 };
+
+export const getTheaterList = async (region: string) => {
+  try {
+    if (region) {
+      const res = await fetch(`http://localhost:5173/api/theater/list?region=${region}`, { method: "GET" });
+      return res.json();
+    } else {
+      const res = await fetch(`http://localhost:5173/api/theater/list`, { method: "GET" });
+      return res.json();
+    }
+  } catch (err) {
+    console.error("Error fetching movie data:", err);
+  }
+};
+
