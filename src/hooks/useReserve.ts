@@ -6,7 +6,7 @@
 //   - queryFn
 
 import { useQuery } from '@tanstack/react-query';
-import { getReserveList } from '../utils/api/reserve';
+import { getReserveList } from '../utils/api/reserve.ts';
 
 export const useFetchReservationListQuery = (id: number) => {
   return useQuery({
