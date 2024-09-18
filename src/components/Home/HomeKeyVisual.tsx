@@ -10,7 +10,7 @@ const HomeKeyVisual = () => {
 
   return (
     <div className="key-visual">
-      {upcomingData?.results.slice(0, 1).map((it) => (
+      {upcomingData?.results?.slice(0, 1).map((it) => (
         <div className="kv-inner" key={it.id}>
           <div className="kv-img">
             <img
